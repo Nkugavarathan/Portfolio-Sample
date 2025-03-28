@@ -88,7 +88,7 @@ function Navbar() {
               Portfolio
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               onClick={closeMenu}
               to="testimonial"
@@ -100,7 +100,7 @@ function Navbar() {
             >
               Testimonials
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               onClick={closeMenu}

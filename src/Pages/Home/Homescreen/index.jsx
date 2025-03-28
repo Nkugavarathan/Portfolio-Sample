@@ -6,7 +6,7 @@ import MyPortfolio from "../MyPortfolio"
 import MySkills from "../MySkills"
 import "bootstrap/dist/css/bootstrap.min.css"
 
-import Testimonial from "../Testimonials"
+// import Testimonial from "../Testimonials"
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       <AboutMe />
       <MySkills />
       <MyPortfolio />
-      <Testimonial />
+      {/* <Testimonial /> */}
       <ContactMe />
       <Footer />
     </>

@@ -66,7 +66,7 @@ function Footer() {
                   Contact
                 </Link>
               </li>
-              <li className="mb-2 mb-md-0 mx-md-2">
+              {/* <li className="mb-2 mb-md-0 mx-md-2">
                 <Link
                   activeClass="navbar--active-content"
                   spy={true}
@@ -78,7 +78,7 @@ function Footer() {
                 >
                   Testimonials
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
