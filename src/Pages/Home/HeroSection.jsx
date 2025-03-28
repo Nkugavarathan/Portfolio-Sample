@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import Particles from "react-tsparticles"
 import { loadFull } from "tsparticles"
 
-export default function HeroSection() {
+const HeroSection = () => {
+  // Typewriter effect setup
   const words = [
     { text: "Graphic Designer", color: "#FF6347" },
     { text: "UI/UX Designer", color: "#1E90FF" },
@@ -15,140 +16,188 @@ export default function HeroSection() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [showCursor, setShowCursor] = useState(true)
 
-  const speed = 100 // Slow typing speed (ms)
-  const deleteSpeed = 50 // Faster speed while deleting characters
-  const delayBetweenWords = 1000 // Delay after finishing a word
-
+  // Typewriter effect implementation
   useEffect(() => {
-    let typingTimeout
-
-    // Function for typewriter effect
     const typeEffect = () => {
       const currentWord = words[wordIndex].text
 
-      // Increase or decrease charIndex based on the direction (typing or deleting)
       if (isDeleting) {
-        setCharIndex((prev) => prev - 1) // Decrease character index when deleting
+        setCharIndex((prev) => prev - 1)
       } else {
-        setCharIndex((prev) => prev + 1) // Increase character index when typing
+        setCharIndex((prev) => prev + 1)
       }
 
-      setDisplayText(currentWord.substring(0, charIndex)) // Update text as per charIndex
+      setDisplayText(currentWord.substring(0, charIndex))
 
-      // Handle when the word is completely typed
       if (!isDeleting && charIndex === currentWord.length) {
-        typingTimeout = setTimeout(() => {
-          setIsDeleting(true) // Start deleting after a pause
-        }, delayBetweenWords)
+        setTimeout(() => setIsDeleting(true), 1000)
+        return
       }
 
-      // Handle when the word is completely deleted
       if (isDeleting && charIndex === 0) {
         setIsDeleting(false)
-        setWordIndex((prev) => (prev + 1) % words.length) // Move to the next word
+        setWordIndex((prev) => (prev + 1) % words.length)
       }
 
-      // Set the typing speed and delete speed
-      typingTimeout = setTimeout(typeEffect, isDeleting ? deleteSpeed : speed)
+      setTimeout(typeEffect, isDeleting ? 50 : 100)
     }
 
-    typeEffect()
+    const timer = setTimeout(typeEffect, 100)
+    const cursorTimer = setInterval(() => setShowCursor((prev) => !prev), 500)
 
-    // Cursor blink effect
-    const cursorBlink = setInterval(() => {
-      setShowCursor((prev) => !prev) // Blink cursor effect
-    }, 500)
-
-    // Clean up the blinking cursor interval on unmount
     return () => {
-      clearInterval(cursorBlink)
-      clearTimeout(typingTimeout) // Clean up typing timeout
+      clearTimeout(timer)
+      clearInterval(cursorTimer)
     }
-  }, [charIndex, isDeleting, wordIndex]) // Dependencies ensure effect runs when these values change
+  }, [charIndex, isDeleting, wordIndex])
 
-  // Initialize particles
-  const particlesInit = async (main) => {
-    await loadFull(main) // Load all necessary tsParticles features
+  // Particles initialization with error handling
+  const particlesInit = useCallback(async (engine) => {
+    try {
+      console.log("Initializing particles engine...")
+      await loadFull(engine)
+      console.log("Particles engine loaded successfully")
+    } catch (error) {
+      console.error("Error loading particles engine:", error)
+    }
+  }, [])
+
+  // Minimal working particles configuration
+  const particlesOptions = {
+    particles: {
+      number: {
+        value: 80,
+        density: {
+          enable: true,
+          value_area: 800,
+        },
+      },
+      color: {
+        value: "#ffffff",
+      },
+      shape: {
+        type: "circle",
+      },
+      opacity: {
+        value: 0.5,
+        random: true,
+      },
+      size: {
+        value: 3,
+        random: true,
+      },
+      move: {
+        enable: true,
+        speed: 2,
+        direction: "none",
+        random: false,
+        straight: false,
+        out_mode: "out",
+        bounce: false,
+      },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#ffffff",
+        opacity: 0.4,
+        width: 1,
+      },
+    },
+    interactivity: {
+      detect_on: "window",
+      events: {
+        onhover: {
+          enable: true,
+          mode: "repulse",
+        },
+        onclick: {
+          enable: true,
+          mode: "push",
+        },
+        resize: true,
+      },
+    },
+    retina_detect: true,
   }
 
-  const scrollToSection = (section) => {
-    const element = document.getElementById(section)
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId)
     if (element) {
-      window.scrollTo({
-        top: element.offsetTop,
-        behavior: "smooth",
-      })
+      element.scrollIntoView({ behavior: "smooth" })
     }
   }
 
   return (
-    <section className="hero-section d-flex align-items-center justify-content-center vh-100 text-center">
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          autoPlay: true,
-          background: {
-            color: { value: "#000000" },
-          },
-          fullScreen: {
-            enable: true,
-            zIndex: 0,
-          },
-          interactivity: {
-            detectsOn: "window",
-            events: {
-              onClick: { enable: true, mode: "push" },
-              onHover: {
-                enable: true,
-                mode: "repulse",
-                parallax: { enable: false, force: 2, smooth: 10 },
-              },
-              resize: { delay: 0.5, enable: true },
-            },
-            modes: {
-              push: {
-                default: true,
-                quantity: 4,
-              },
-              repulse: {
-                distance: 200,
-                duration: 0.4,
-                factor: 100,
-                speed: 1,
-                maxSpeed: 50,
-                easing: "ease-out-quad",
-              },
-            },
-          },
-          particles: {
-            number: {
-              value: 80,
-              density: { enable: true, width: 1920, height: 1080 },
-            },
-            color: { value: "#ff0000" },
-            size: { value: 3 },
-            move: { speed: 6 },
-            shape: { type: "circle" },
-            opacity: { value: 0.5 },
-            links: { enable: true, distance: 150, opacity: 0.4 },
-            collisions: { enable: false },
-            zIndex: { value: 0 },
-          },
+    <section
+      className="hero-section"
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100vh",
+        backgroundColor: "#000",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        overflow: "hidden",
+      }}
+    >
+      {/* Particles container - absolutely positioned */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
         }}
-      />
-      <div className="hero-content text-light position-absolute">
-        <h1 className="fw-bold">
+      >
+        <Particles
+          id="tsparticles"
+          init={particlesInit}
+          options={particlesOptions}
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      </div>
+
+      {/* Content container */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          color: "white",
+          padding: "20px",
+          maxWidth: "800px",
+        }}
+      >
+        <h1
+          style={{ fontSize: "3rem", fontWeight: "bold", marginBottom: "1rem" }}
+        >
           Hey, I'm John <br />
           <span style={{ color: words[wordIndex].color }}>{displayText}</span>
-          {showCursor && <span className="cursor">|</span>}
+          {showCursor && <span style={{ opacity: showCursor ? 1 : 0 }}>|</span>}
         </h1>
-        <p className="mt-3 text-muted">
+        <p style={{ fontSize: "1.2rem", color: "#aaa", marginBottom: "2rem" }}>
           I craft visually appealing designs that bring brands to life.
         </p>
         <button
-          className="btn btn-primary mt-3"
           onClick={() => scrollToSection("Contact")}
+          style={{
+            padding: "12px 24px",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            fontSize: "1rem",
+            cursor: "pointer",
+            transition: "background-color 0.3s",
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "#007bff")}
         >
           Get In Touch
         </button>
@@ -156,3 +205,5 @@ export default function HeroSection() {
     </section>
   )
 }
+
+export default HeroSection

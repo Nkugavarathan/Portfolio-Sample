@@ -43,7 +43,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`navbar fixed-top ${scrolling ? "bg-dark" : "bg-primary"}`}
+      className={`navbar fixed-top ${scrolling ? "bg-danger" : "bg-primary"}`}
       style={{ transition: "background-color 0.3s ease", padding: "15px 20px" }}
     >
       <div className="container d-flex justify-content-between align-items-center">
