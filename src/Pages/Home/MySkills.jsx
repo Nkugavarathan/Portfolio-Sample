@@ -20,7 +20,6 @@ export default function MySkills() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <img
-              src={item.src}
               alt={item.title}
               className="skills--section--icon mb-2"
               style={{

@@ -1,28 +1,30 @@
+
 {
     
-  
-    "skills": [
-      {
-        "id": "1",
-        "src": "./img/figma-icon.png",
-        "title": "Figma"
-      },
-      {
-        "id": "2",
-        "src": "./img/photoshop-icon.png",
-        "title": "Photoshop"
-      },
-      {
-        "id": "3",
-        "src": "./img/xd-icon.png",
-        "title": "Adobe XD"
-      },
-      {
-        "id": "4",
-        "src": "./img/illustrator-icon.png",
-        "title": "Illustrator"
-      }
-    ]
+
+   "skills": [
+  {
+    "id": "1",
+    "title": "Figma",
+    "icon": "figma" 
+  },
+  {
+    "id": "2",
+    "title": "Photoshop",
+    "icon": "photoshop" 
+  },
+  {
+    "id": "3",
+    "title": "Adobe XD",
+    "icon": "adobe"
+  },
+  {
+    "id": "4",
+    "title": "Illustrator",
+    "icon": "illustrator" 
+  }
+]
+
   ,
   
     "portfolio": [
