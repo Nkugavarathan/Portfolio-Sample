@@ -15,12 +15,10 @@ export default function MyPortfolio() {
 
   return (
     <section className="portfolio--section" id="MyPortfolio">
-      <div className="portfolio--container-box">
-        <div className="portfolio--container">
-          <h2 className="section--heading text-center text-primary fw-bold">
-            My Recent Projects
-          </h2>
-        </div>
+      <div className="portfolio--container text-center my-4">
+        <h2 className="skills--section--heading fw-bold text-primary ">
+          My Recent Projects
+        </h2>
       </div>
 
       {/* Bootstrap Grid */}

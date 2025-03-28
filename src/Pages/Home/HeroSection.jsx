@@ -130,14 +130,21 @@ const HeroSection = () => {
   }
 
   const scrollToSection = (sectionId) => {
+    console.log("Scrolling to:", sectionId)
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      window.scrollTo({
+        top: element.offsetTop - 70, // Adjust for the navbar height
+        behavior: "smooth",
+      })
+    } else {
+      console.error("Section not found:", sectionId)
     }
   }
 
   return (
     <section
+      id="heroSection"
       style={{
         position: "relative",
         width: "100%",

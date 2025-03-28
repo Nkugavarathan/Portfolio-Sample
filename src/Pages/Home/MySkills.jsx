@@ -4,9 +4,9 @@ import data from "../../data/index.json" // Assuming data is in this file
 export default function MySkills() {
   return (
     <section className="skills--section" id="mySkills">
-      <div className="portfolio--container">
-        <h2 className="skills--section--heading text-center fw-bold text-primary">
-          My Expertise
+      <div className="portfolio--container text-center">
+        <h2 className="skills--section--heading fw-bold text-primary mx-auto">
+          My skills
         </h2>
       </div>
       <div className="skills--section--container d-flex justify-content-center align-items-center flex-wrap">

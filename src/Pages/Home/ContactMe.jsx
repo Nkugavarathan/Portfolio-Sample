@@ -25,12 +25,11 @@ export default function ContactMe() {
 
   return (
     <section id="Contact" className="contact--section">
-      <div>
-        <p className="sub--title">Get In Touch</p>
-        <h2>Contact Me</h2>
-        <p className="text-lg">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. In, odit.
-        </p>
+      <div className="portfolio--container text-center">
+        <p className="sub--title fw-bold text-primary">Get In Touch</p>
+        <h2 className="skills--section--heading fw-bold text-primary">
+          Contact Me
+        </h2>
       </div>
 
       {/* Framer Motion animation for form */}
