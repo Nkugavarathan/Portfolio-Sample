@@ -16,7 +16,7 @@ function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setScrolling(true)
+        setScrolling(true) // Add the "scrolled" class when scrolled
       } else {
         setScrolling(false)
       }
@@ -101,21 +101,21 @@ function Navbar() {
               Testimonials
             </Link>
           </li>
+          <li>
+            <Link
+              onClick={closeMenu}
+              to="Contact"
+              className="navbar--content"
+              spy
+              smooth
+              offset={-70}
+              duration={500}
+            >
+              Contact Me
+            </Link>
+          </li>
         </ul>
       </div>
-
-      {/* Contact Button */}
-      <Link
-        onClick={closeMenu}
-        to="Contact"
-        className="btn btn-outline-primary"
-        spy
-        smooth
-        offset={-70}
-        duration={500}
-      >
-        Contact Me
-      </Link>
     </nav>
   )
 }

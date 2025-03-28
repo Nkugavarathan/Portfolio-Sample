@@ -243,6 +243,31 @@ h2 {
   }
 }
 
+/* Optional styles for navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Hamburger menu styles */
+.nav__hamburger {
+  cursor: pointer;
+}
+
+/* Navbar Items */
+.navbar--items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* When navbar is scrolled */
+.navbar.scrolled {
+  background-color: #333; /* Dark background when scrolled */
+  color: white;
+}
 
 /* Hero Section Style */
 
