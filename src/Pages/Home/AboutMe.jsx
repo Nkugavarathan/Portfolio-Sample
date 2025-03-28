@@ -12,7 +12,7 @@ export default function AboutMe() {
         transition={{ duration: 1, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <img src="./img/about-me.png" alt="About Me" />
+        {/* <img src="./img/about-me.png" alt="About Me" /> */}
       </motion.div>
 
       {/* Text Content with right animation */}
