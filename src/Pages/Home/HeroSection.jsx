@@ -69,10 +69,7 @@ export default function HeroSection() {
       <div>
         <h1 className="fw-bold">
           Hey, I'm John <br />
-          <span
-            className="text-primary"
-            style={{ color: words[wordIndex].color }}
-          >
+          <span className="" style={{ color: words[wordIndex].color }}>
             {displayText}
           </span>
           {showCursor && <span className="cursor">|</span>}{" "}
