@@ -4,8 +4,8 @@ import React from "react"
 function Footer() {
   return (
     <footer className="footer--container bg-primary-subtle text-dark py-4">
-      <div className="container">
-        <div className="row text-center">
+      <div className="container d-flex justify-content-center align-items-center">
+        <div className="row text-center w-100">
           {/* Logo Section */}
           <div className="col-12 col-md-3 mb-3 mb-md-0">
             <h5>My Portfolio</h5>
