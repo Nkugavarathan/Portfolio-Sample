@@ -13,7 +13,7 @@ export default function HeroSection() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [showCursor, setShowCursor] = useState(true)
 
-  const speed = 100 // Slow typing speed (ms)
+  const speed = 10 // Slow typing speed (ms)
   const delayBetweenWords = 1000 // Delay after finishing a word
   const deleteSpeed = 50 // Faster speed while deleting characters
 

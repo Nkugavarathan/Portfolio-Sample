@@ -1,30 +1,30 @@
 {
+    
+  
     "skills": [
       {
         "id": "1",
-        "src": "./img/product-chain-1.png",
-        "title": "Front-End",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspenmdisse varius eim in eros elementum tristique"
+        "src": "./img/figma-icon.png",
+        "title": "Figma"
       },
       {
         "id": "2",
-        "src": "./img/tag-1.png",
-        "title": "Back-End",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspenmdisse varius eim in eros elementum tristique"
+        "src": "./img/photoshop-icon.png",
+        "title": "Photoshop"
       },
       {
         "id": "3",
-        "src": "./img/feather-pen-2.png",
-        "title": "UI & UX Design",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspenmdisse varius eim in eros elementum tristique"
+        "src": "./img/xd-icon.png",
+        "title": "Adobe XD"
       },
       {
         "id": "4",
-        "src": "./img/feather-pen-1.png",
-        "title": "Webflow Development",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspenmdisse varius eim i"
+        "src": "./img/illustrator-icon.png",
+        "title": "Illustrator"
       }
-    ],
+    ]
+  ,
+  
     "portfolio": [
       {
         "id": "1",

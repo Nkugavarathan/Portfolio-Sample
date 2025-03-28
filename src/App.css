@@ -326,14 +326,40 @@ h2 {
 /* Hero Section Style Ends */
 
 /* Skills Section Style */
-.skills--section--card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+@media (max-width: 767px) {
+  .skills--section--container {
+    flex-direction: column !important; /* Stack items vertically on small screens */
+  }
+  .skills--section--icon-container {
+    margin-left: 0 !important; 
+    margin-right: 0 !important;
+  }
 }
 
-.skills--section--card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.skills--section--icon-container {
+  transition: transform 0.3s ease;
 }
+
+.skills--section--icon-container:hover .skills--section--icon {
+  transform: scale(1.1);
+}
+
+.skills--section--icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.skills--section--title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+.skills--section--icon-container:hover .skills--section--title {
+  color: #007bff;
+}
+
 
 /* Skills Style Ends */
 
