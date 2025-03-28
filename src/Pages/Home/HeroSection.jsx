@@ -1,155 +1,87 @@
-// import React, { useState, useEffect } from "react"
-// import { Particles } from "react-tsparticles"
-// import { loadFull } from "tsparticles"
-
-// export default function HeroSection() {
-//   const [text, setText] = useState("")
-//   const fullText = "Hey, I'm John Full Stack Developer"
-//   const typingSpeed = 200 // Adjusted to slower speed (in milliseconds)
-//   const delayAfterTyping = 3000 // Delay before restarting the typing effect
-
-//   useEffect(() => {
-//     let index = 0
-
-//     const typeText = () => {
-//       const typingInterval = setInterval(() => {
-//         setText(fullText.slice(0, index + 1)) // Correctly slices the string
-//         index++
-
-//         if (index === fullText.length) {
-//           clearInterval(typingInterval) // Stop typing once the text is complete
-//           setTimeout(() => {
-//             setText("") // Reset the text after a delay
-//             index = 0 // Restart typing
-//             typeText() // Recursive call to restart typing
-//           }, delayAfterTyping)
-//         }
-//       }, typingSpeed)
-//     }
-
-//     typeText() // Start typing effect
-
-//     return () => clearInterval() // Cleanup interval on component unmount
-//   }, [])
-
-//   const particlesInit = async (main) => {
-//     await loadFull(main) // Loads tsparticles instance with all features
-//   }
-
-//   const particlesConfig = {
-//     autoPlay: true,
-//     background: {
-//       color: {
-//         value: "#f5fcff", // Matches --bg-shade
-//       },
-//     },
-//     detectRetina: true,
-//     fpsLimit: 120,
-//     interactivity: {
-//       detectsOn: "canvas",
-//       events: {
-//         onHover: {
-//           enable: true,
-//           mode: "repulse", // Particles repel on hover
-//         },
-//       },
-//     },
-//     particles: {
-//       color: {
-//         value: "#5e3bee", // Matches --primary
-//       },
-//       links: {
-//         enable: true,
-//         color: "#1c1e53", // Matches --darkblue
-//         opacity: 0.4,
-//         distance: 150,
-//       },
-//       move: {
-//         enable: true,
-//         speed: 2, // Smooth movement
-//         direction: "none",
-//       },
-//       number: {
-//         value: 70, // Balanced number of particles
-//         density: {
-//           enable: true,
-//           area: 800,
-//         },
-//       },
-//       opacity: {
-//         value: 0.3, // Subtle effect
-//       },
-//       size: {
-//         value: { min: 1, max: 3 }, // Size range
-//       },
-//     },
-//   }
-
-//   return (
-//     <section id="heroSection" className="hero--section">
-//       <Particles
-//         id="tsparticles"
-//         init={particlesInit}
-//         options={particlesConfig}
-//       />
-//       <div className="hero--section--content--box">
-//         <div className="hero--section--content">
-//           <h1 className="hero--section--title">{text}</h1>
-//           <p className="hero--section-description">
-//             Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-//             <br /> Dolorum, quas. Amet soluta assumenda cum?
-//           </p>
-//         </div>
-//         <button className="btn btn-primary">Get In Touch</button>
-//       </div>
-//       <div className="hero--section--img">
-//         <img src="./img/hero_img.png" alt="Hero Section" />
-//       </div>
-//     </section>
-//   )
-// }
-
 import React, { useState, useEffect } from "react"
 
 export default function HeroSection() {
-  const [text, setText] = useState("") // State for typing effect
-  const fullText = "Hey, I'm John Full Stack Developer" // Full text to type out
-  const typingSpeed = 100 // Typing speed in milliseconds
-  const delayAfterTyping = 3000 // Delay before restarting the typing effect
+  const words = [
+    { text: "Graphic Designer", color: "#FF6347" }, // Tomato color
+    { text: "UI/UX Designer", color: "#1E90FF" }, // DodgerBlue color
+    { text: "Creative Thinker", color: "#32CD32" }, // LimeGreen color
+  ]
+
+  const [displayText, setDisplayText] = useState("")
+  const [wordIndex, setWordIndex] = useState(0)
+  const [charIndex, setCharIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [showCursor, setShowCursor] = useState(true)
+
+  const speed = 100 // Slow typing speed (ms)
+  const delayBetweenWords = 1000 // Delay after finishing a word
+  const deleteSpeed = 50 // Faster speed while deleting characters
 
   useEffect(() => {
-    let index = 0
+    let typingTimeout
 
-    const typeText = () => {
-      const typingInterval = setInterval(() => {
-        setText((prev) => fullText.slice(0, index + 1)) // Update text character by character
-        index++
+    // Function for typewriter effect
+    const typeEffect = () => {
+      const currentWord = words[wordIndex].text
+      const currentColor = words[wordIndex].color // Get the color for the current word
 
-        if (index === fullText.length) {
-          clearInterval(typingInterval) // Stop when the full text is typed
-          setTimeout(() => {
-            setText("") // Clear the text after a delay
-            index = 0
-            typeText() // Restart typing effect
-          }, delayAfterTyping)
-        }
-      }, typingSpeed)
+      if (isDeleting) {
+        setCharIndex((prev) => prev - 1) // Decrease character index when deleting
+      } else {
+        setCharIndex((prev) => prev + 1) // Increase character index when typing
+      }
+
+      // Set the text based on current character index
+      setDisplayText(currentWord.substring(0, charIndex))
+
+      // Handle when the word is completely typed
+      if (!isDeleting && charIndex === currentWord.length) {
+        typingTimeout = setTimeout(() => {
+          setIsDeleting(true) // Start deleting after a pause
+        }, delayBetweenWords)
+      }
+
+      // Handle when the word is completely deleted
+      if (isDeleting && charIndex === 0) {
+        setIsDeleting(false)
+        setWordIndex((prev) => (prev + 1) % words.length) // Move to the next word
+      }
+
+      // Set the typing speed and delete speed
+      typingTimeout = setTimeout(typeEffect, isDeleting ? deleteSpeed : speed)
     }
 
-    typeText() // Start typing effect
+    typeEffect()
 
-    return () => clearInterval() // Cleanup interval on unmount
-  }, []) // Empty dependency array ensures this runs once on mount
+    const cursorBlink = setInterval(() => {
+      setShowCursor((prev) => !prev) // Blink cursor effect
+    }, 500)
+
+    // Clean up the blinking cursor interval on unmount
+    return () => {
+      clearInterval(cursorBlink)
+      clearTimeout(typingTimeout) // Clean up typing timeout
+    }
+  }, [charIndex, isDeleting, wordIndex]) // Dependencies ensure effect runs when these values change
 
   return (
-    <section id="heroSection" className="hero--section">
-      <div className="hero--section--content--box">
-        <div className="hero--section--content">
-          <h1 className="hero--section--title">{text}</h1>{" "}
-          {/* Displays typing effect */}
-        </div>
-        <p>dsdf</p>
-        <button className="btn btn-primary">Get In Touch</button>
+    <section className="d-flex align-items-center justify-content-center vh-100 bg-light text-center">
+      <div>
+        <h1 className="fw-bold">
+          Hey, I'm John <br />
+          <span
+            className="text-primary"
+            style={{ color: words[wordIndex].color }}
+          >
+            {displayText}
+          </span>
+          {showCursor && <span className="cursor">|</span>}{" "}
+          {/* Only one cursor */}
+        </h1>
+        <p className="mt-3 text-muted">
+          I craft visually appealing designs that bring brands to life.
+        </p>
+        <button className="btn btn-primary mt-3">Get In Touch</button>
       </div>
     </section>
   )

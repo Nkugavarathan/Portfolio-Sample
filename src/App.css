@@ -150,6 +150,7 @@ h2 {
 /* Section Titles Ends */
 
 /* Navbar Style Start */
+/* Navbar Styling */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -161,17 +162,17 @@ h2 {
   right: 0;
   z-index: 1000;
   background: transparent;
-  transition: background 0.4s ease-in-out, color 0.4s ease-in-out;
+  transition: background 0.4s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 /* Navbar when scrolled */
 .navbar.scrolled {
-  background: rgba(25, 25, 112, 0.95); /* Midnight Blue */
+  background: #e3f2fd !important; /* Light primary color */
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Nav items */
-.navbar--items > ul {
+/* Navbar Items */
+.navbar--items ul {
   list-style: none;
   display: flex;
   align-items: center;
@@ -180,35 +181,27 @@ h2 {
 
 .navbar--items ul > li {
   list-style: none;
- 
 }
 
-.navbar--items ul > li > a {
+/* Navbar Links */
+.navbar--content {
   text-decoration: none;
   font-size: 16px;
-  font-weight: 400;
-  transition: color 0.3s ease-in-out;
-  color: #282938;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-/* Default text color */
-.navbar--content {
-  color: white; /* White when navbar is transparent */
-  transition: color 0.3s ease-in-out;
-}
-
-/* Change text color when scrolled */
-.navbar.scrolled .navbar--content {
-  color: #ddd; /* Light grey text when background is dark */
-}
-
+/* Hover Effect */
 .navbar--content:hover {
-  color: violet; /* Violet hover effect */
+  color: #0d6efd;
+  transform: scale(1.1);
 }
 
-/* Active Section Highlight */
-.navbar--active-content {
-  color: violet;
+/* Change color when navbar is scrolled */
+.navbar.scrolled .navbar--content {
+  color: #282938;
 }
 
 /* Contact Button */
@@ -223,48 +216,89 @@ h2 {
 }
 
 .btn-outline-primary:hover {
-  background: violet;
+  background: #0d6efd;
   color: white;
 }
 
-/* Scrolled navbar button */
-.navbar.scrolled .btn-outline-primary {
-  border-color: violet;
-  color: violet;
-}
-
-.navbar.scrolled .btn-outline-primary:hover {
-  background: white;
-  color: black;
-}
-
-/* Responsive Navbar */
+/* Hamburger Menu */
 .nav__hamburger {
   display: none;
   cursor: pointer;
-}
-
-.nav__hamburger__line {
-  display: block;
   width: 30px;
-  height: 3px;
-  background: white;
-  margin: 5px 0;
+  height: 24px;
+  position: relative;
 }
 
+/* Hamburger Lines */
+.nav__hamburger__line {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: #333;
+  transition: all 0.3s ease-in-out;
+}
 
-/* Navbar Styler Ends */
+/* Top Line */
+.nav__hamburger__line:nth-child(1) {
+  top: 0;
+}
+
+/* Middle Line */
+.nav__hamburger__line:nth-child(2) {
+  top: 10px;
+}
+
+/* Bottom Line */
+.nav__hamburger__line:nth-child(3) {
+  top: 20px;
+}
+
+/* Transform into X when active */
+.nav__hamburger.open .nav__hamburger__line:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.nav__hamburger.open .nav__hamburger__line:nth-child(2) {
+  opacity: 0;
+}
+
+.nav__hamburger.open .nav__hamburger__line:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Change color when navbar is scrolled */
+.navbar.scrolled .nav__hamburger__line {
+  background: #282938;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar--items {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #e3f2fd;
+    display: none;
+    flex-direction: column;
+    padding: 15px 0;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .navbar--items.active {
+    display: flex;
+    transform: translateY(0);
+  }
+
+  .nav__hamburger {
+    display: block;
+  }
+}
+
 
 /* Hero Section Style */
-.hero--section {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 133.333px 85.333px 133.333px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  background-color: var(--bg-shade);
-}
+
 .hero--section {
   display: flex;
   justify-content: center;
@@ -273,109 +307,34 @@ h2 {
   height: 100vh; /* Ensures it spans the full viewport height */
 }
 
-.hero--section--content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 21.333px;
+.cursor {
+  display: inline-block;
+  width: 5px;
+  height: 30px;
+  background-color: black;
+  margin-left: 5px;
+  animation: blink 0.8s infinite;
 }
-.hero--section--content--box > button {
-  margin-top: 21.333px;
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
-.hero--section--title {
-  color: var(--heading-color);
-  font-size: 74.667px;
-  font-weight: 700;
-  line-height: 90px;
-  align-self: stretch;
-}
-.hero--section--title--color {
-  color: var(--primary);
-}
-.hero--section-description {
-  color: var(--darkblue);
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 36px;
-}
-.hero--section--img {
-  display: flex;
-}
-.hero--section--img > img {
-  width: 100%;
-  height: 100%;
-}
+
+
 /* Hero Section Style Ends */
 
 /* Skills Section Style */
-.skills--section {
-  display: flex;
-  padding: 149.33px 85.33px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 106.667px;
-}
-.skills--section--heading {
-  color: var(--heading-color);
-  font-size: 64px;
-  font-weight: 700;
-  line-height: 77px;
-}
-.skills--section--container {
-  display: grid;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 42.6px;
-  grid-template-columns: repeat(4, 1fr);
-}
 .skills--section--card {
-  display: flex;
-  padding: 32px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-  flex: 1 0 0;
-  border-radius: 10.6px;
-  background: var(--bg-shade);
-  min-height: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .skills--section--card:hover {
-  border-bottom: 4px solid var(--primary);
+  transform: translateY(-10px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.skills--section--card:hover .skills--section--description {
-  color: var(--darkblue);
-}
-.skills--section--img {
-  display: flex;
-  padding: 13.3px;
-  justify-content: center;
-  align-items: center;
-  gap: 13.3px;
-  border-radius: 10.6px;
-  background: #fff;
-  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.1);
-}
-.skills--section--card--content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-  align-self: stretch;
-}
-.skills--section--title {
-  color: var(--heading-color);
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 45px;
-}
-.skills--section--description {
-  color: var(--black);
-  font-size: 21.3px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px;
-}
+
 /* Skills Style Ends */
 
 /* About Us */

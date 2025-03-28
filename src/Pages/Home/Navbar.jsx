@@ -34,26 +34,30 @@ function Navbar() {
         navActive ? "active" : ""
       }`}
     >
-      <div className="logo">{/* Your logo here */}</div>
-      <a
-        className={`nav__hamburger ${navActive ? "active" : ""}`}
+      <div className="logo">My Portfolio</div>
+
+      {/* Hamburger Menu */}
+      <div
+        className={`nav__hamburger ${navActive ? "open" : ""}`}
         onClick={toggleNav}
       >
         <span className="nav__hamburger__line"></span>
         <span className="nav__hamburger__line"></span>
         <span className="nav__hamburger__line"></span>
-      </a>
+      </div>
+
+      {/* Navigation Links */}
       <div className={`navbar--items ${navActive ? "active" : ""}`}>
         <ul>
           <li>
             <Link
               onClick={closeMenu}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
               to="heroSection"
               className="navbar--content"
+              spy
+              smooth
+              offset={-70}
+              duration={500}
             >
               Home
             </Link>
@@ -61,12 +65,12 @@ function Navbar() {
           <li>
             <Link
               onClick={closeMenu}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
               to="AboutMe"
               className="navbar--content"
+              spy
+              smooth
+              offset={-70}
+              duration={500}
             >
               About Me
             </Link>
@@ -74,12 +78,12 @@ function Navbar() {
           <li>
             <Link
               onClick={closeMenu}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
               to="MyPortfolio"
               className="navbar--content"
+              spy
+              smooth
+              offset={-70}
+              duration={500}
             >
               Portfolio
             </Link>
@@ -87,26 +91,28 @@ function Navbar() {
           <li>
             <Link
               onClick={closeMenu}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
               to="testimonial"
               className="navbar--content"
+              spy
+              smooth
+              offset={-70}
+              duration={500}
             >
               Testimonials
             </Link>
           </li>
         </ul>
       </div>
+
+      {/* Contact Button */}
       <Link
         onClick={closeMenu}
-        spy={true}
-        smooth={true}
-        offset={-70}
-        duration={500}
         to="Contact"
         className="btn btn-outline-primary"
+        spy
+        smooth
+        offset={-70}
+        duration={500}
       >
         Contact Me
       </Link>
