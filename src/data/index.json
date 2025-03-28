@@ -2,28 +2,29 @@
 {
     
 
-   "skills": [
-  {
-    "id": "1",
-    "title": "Figma",
-    "icon": "figma" 
-  },
-  {
-    "id": "2",
-    "title": "Photoshop",
-    "icon": "photoshop" 
-  },
-  {
-    "id": "3",
-    "title": "Adobe XD",
-    "icon": "adobe"
-  },
-  {
-    "id": "4",
-    "title": "Illustrator",
-    "icon": "illustrator" 
-  }
-]
+"skills": [
+    {
+      "id": "1",
+      "title": "Figma",
+      "src": "https://www.figma.com/community/file/930374612850356203/figma-svg-logo-wordmark"
+    },
+    {
+      "id": "2",
+      "title": "Photoshop",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Adobe_Photoshop_2022.svg"
+    },
+    {
+      "id": "3",
+      "title": "Adobe XD",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Adobe_XD_CC_icon.svg"
+    },
+    {
+      "id": "4",
+      "title": "Illustrator",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Adobe_Illustrator_CC_icon.svg"
+    }
+  ]
+
 
   ,
   

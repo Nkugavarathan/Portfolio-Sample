@@ -25,61 +25,8 @@ p {
   --black: #000000;
   --white: #ffffff;
 }
-.btn {
-  font-family: "Roboto";
-  display: inline-block;
-  padding: 14px 32px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 4px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  transition: background-color 0.5s;
-  -webkit-transition: background-color 0.5s;
-  -moz-transition: background-color 0.5s;
-  -ms-transition: background-color 0.5s;
-  -o-transition: background-color 0.5s;
-}
-.btn-outline-primary {
-  color: var(--primary);
-  background-color: var(--white);
-  border: 1px solid var(--primary);
-}
-.btn-outline-primary:hover {
-  color: var(--white);
-  background-color: var(--primary);
-}
-.btn-primary {
-  color: var(--white);
-  background-color: var(--primary);
-  border: 1px solid var(--primary);
-}
-.btn-primary:hover {
-  color: var(--primary);
-  background-color: var(--white);
-}
-.btn-github {
-  color: var(--white);
-  background-color: var(--github);
-  border: var(--github);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.95);
-  gap: 16px;
-}
-.btn-github:hover {
-  color: var(--github);
-  background-color: var(--white);
-}
+
+
 /* Global CSS Ends */
 /* Main Headings */
 
@@ -326,39 +273,6 @@ h2 {
 /* Hero Section Style Ends */
 
 /* Skills Section Style */
-@media (max-width: 767px) {
-  .skills--section--container {
-    flex-direction: column !important; /* Stack items vertically on small screens */
-  }
-  .skills--section--icon-container {
-    margin-left: 0 !important; 
-    margin-right: 0 !important;
-  }
-}
-
-.skills--section--icon-container {
-  transition: transform 0.3s ease;
-}
-
-.skills--section--icon-container:hover .skills--section--icon {
-  transform: scale(1.1);
-}
-
-.skills--section--icon {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-}
-
-.skills--section--title {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #495057;
-}
-
-.skills--section--icon-container:hover .skills--section--title {
-  color: #007bff;
-}
 
 
 /* Skills Style Ends */
