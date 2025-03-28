@@ -851,3 +851,37 @@ input[type="checkbox"] {
   color: rgb(252, 252, 252);
 }
 
+/* Footer Social Icons & Navigation Links */
+.footer-link {
+  color: #333; /* Default text color */
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  cursor: pointer;
+  text-decoration: none; /* Remove underline */
+}
+
+.footer-link:hover {
+  color: #0d6efd; /* Bootstrap primary color */
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Footer Background Color */
+.bg-primary-subtle {
+  background-color: #e3f2fd !important; /* Light primary color */
+}
+
+/* Footer Social Icons */
+.social-icon {
+  color: #333; /* Default icon color */
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.social-icon:hover {
+  color: #0d6efd; /* Bootstrap primary color */
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Footer Background Color */
+.bg-primary-subtle {
+  background-color: #e3f2fd !important; /* Light primary color */
+}

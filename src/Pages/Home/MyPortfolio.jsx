@@ -37,19 +37,21 @@ export default function MyPortfolio() {
             >
               <div className="card h-100">
                 <img src={item.src} className="card-img-top" alt="Project" />
-                <div className="card-body">
+                <div className="card-body d-flex flex-column justify-content-between">
                   <h5 className="card-title">{item.title}</h5>
                   <p className="card-text">{item.description}</p>
                   {/* Read More Button */}
-                  <button
-                    className="btn btn-primary "
-                    onClick={(e) => {
-                      e.stopPropagation() // Prevent modal from opening when clicking "Read More"
-                      openModal(item)
-                    }}
-                  >
-                    Read More
-                  </button>
+                  <div className="d-flex justify-content-center mt-auto">
+                    <button
+                      className="btn btn-primary"
+                      onClick={(e) => {
+                        e.stopPropagation() // Prevent modal from opening when clicking "Read More"
+                        openModal(item)
+                      }}
+                    >
+                      Read More
+                    </button>
+                  </div>
                 </div>
               </div>
             </motion.div>
