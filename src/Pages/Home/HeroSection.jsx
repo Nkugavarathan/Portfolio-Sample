@@ -13,9 +13,9 @@ export default function HeroSection() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [showCursor, setShowCursor] = useState(true)
 
-  const speed = 10 // Slow typing speed (ms)
-  const delayBetweenWords = 1000 // Delay after finishing a word
+  const speed = 100 // Slow typing speed (ms)
   const deleteSpeed = 50 // Faster speed while deleting characters
+  const delayBetweenWords = 1000 // Delay after finishing a word
 
   useEffect(() => {
     let typingTimeout
@@ -23,16 +23,15 @@ export default function HeroSection() {
     // Function for typewriter effect
     const typeEffect = () => {
       const currentWord = words[wordIndex].text
-      const currentColor = words[wordIndex].color // Get the color for the current word
 
+      // Increase or decrease charIndex based on the direction (typing or deleting)
       if (isDeleting) {
         setCharIndex((prev) => prev - 1) // Decrease character index when deleting
       } else {
         setCharIndex((prev) => prev + 1) // Increase character index when typing
       }
 
-      // Set the text based on current character index
-      setDisplayText(currentWord.substring(0, charIndex))
+      setDisplayText(currentWord.substring(0, charIndex)) // Update text as per charIndex
 
       // Handle when the word is completely typed
       if (!isDeleting && charIndex === currentWord.length) {
@@ -53,6 +52,7 @@ export default function HeroSection() {
 
     typeEffect()
 
+    // Cursor blink effect
     const cursorBlink = setInterval(() => {
       setShowCursor((prev) => !prev) // Blink cursor effect
     }, 500)
