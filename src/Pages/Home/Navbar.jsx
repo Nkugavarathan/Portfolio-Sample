@@ -106,8 +106,6 @@ function Navbar() {
           )}
         </ul>
       </div>
-
-      {/* 🔹 Smooth underline transition & animations */}
     </nav>
   )
 }
