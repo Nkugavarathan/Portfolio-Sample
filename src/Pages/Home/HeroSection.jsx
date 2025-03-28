@@ -3,7 +3,7 @@ import Particles from "react-tsparticles"
 import { loadFull } from "tsparticles"
 
 const HeroSection = () => {
-  // Typewriter effect setup
+  // Typewriter effect setup (working perfectly)
   const words = [
     { text: "Graphic Designer", color: "#FF6347" },
     { text: "UI/UX Designer", color: "#1E90FF" },
@@ -11,59 +11,68 @@ const HeroSection = () => {
   ]
 
   const [displayText, setDisplayText] = useState("")
-  const [wordIndex, setWordIndex] = useState(0)
-  const [charIndex, setCharIndex] = useState(0)
+  const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
   const [showCursor, setShowCursor] = useState(true)
 
   // Typewriter effect implementation
   useEffect(() => {
-    const typeEffect = () => {
-      const currentWord = words[wordIndex].text
+    let timeout
+    const currentWord = words[currentWordIndex].text
 
-      if (isDeleting) {
-        setCharIndex((prev) => prev - 1)
+    // Cursor blinking effect
+    const cursorInterval = setInterval(() => {
+      setShowCursor((prev) => !prev)
+    }, 500)
+
+    if (isDeleting) {
+      // Deleting phase
+      if (displayText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayText(currentWord.substring(0, displayText.length - 1))
+        }, 50)
       } else {
-        setCharIndex((prev) => prev + 1)
-      }
-
-      setDisplayText(currentWord.substring(0, charIndex))
-
-      if (!isDeleting && charIndex === currentWord.length) {
-        setTimeout(() => setIsDeleting(true), 1000)
-        return
-      }
-
-      if (isDeleting && charIndex === 0) {
+        // Switch to next word after deleting
         setIsDeleting(false)
-        setWordIndex((prev) => (prev + 1) % words.length)
+        setCurrentWordIndex((prev) => (prev + 1) % words.length)
       }
-
-      setTimeout(typeEffect, isDeleting ? 50 : 100)
+    } else {
+      // Typing phase
+      if (displayText.length < currentWord.length) {
+        timeout = setTimeout(() => {
+          setDisplayText(currentWord.substring(0, displayText.length + 1))
+        }, 100)
+      } else {
+        // Start deleting after pause
+        timeout = setTimeout(() => {
+          setIsDeleting(true)
+        }, 1500)
+      }
     }
-
-    const timer = setTimeout(typeEffect, 100)
-    const cursorTimer = setInterval(() => setShowCursor((prev) => !prev), 500)
 
     return () => {
-      clearTimeout(timer)
-      clearInterval(cursorTimer)
+      clearTimeout(timeout)
+      clearInterval(cursorInterval)
     }
-  }, [charIndex, isDeleting, wordIndex])
+  }, [displayText, currentWordIndex, isDeleting])
 
-  // Particles initialization with error handling
+  // Particles initialization - JavaScript version
   const particlesInit = useCallback(async (engine) => {
+    console.log("Initializing particles...")
     try {
-      console.log("Initializing particles engine...")
       await loadFull(engine)
-      console.log("Particles engine loaded successfully")
+      console.log("Particles loaded successfully!")
     } catch (error) {
-      console.error("Error loading particles engine:", error)
+      console.error("Error loading particles:", error)
     }
   }, [])
 
-  // Minimal working particles configuration
+  // Particles configuration
   const particlesOptions = {
+    fullScreen: {
+      enable: false,
+      zIndex: -1,
+    },
     particles: {
       number: {
         value: 80,
@@ -95,7 +104,7 @@ const HeroSection = () => {
         out_mode: "out",
         bounce: false,
       },
-      line_linked: {
+      links: {
         enable: true,
         distance: 150,
         color: "#ffffff",
@@ -129,7 +138,6 @@ const HeroSection = () => {
 
   return (
     <section
-      className="hero-section"
       style={{
         position: "relative",
         width: "100%",
@@ -142,7 +150,7 @@ const HeroSection = () => {
         overflow: "hidden",
       }}
     >
-      {/* Particles container - absolutely positioned */}
+      {/* Particles Container */}
       <div
         style={{
           position: "absolute",
@@ -150,6 +158,7 @@ const HeroSection = () => {
           left: 0,
           width: "100%",
           height: "100%",
+          zIndex: 0,
         }}
       >
         <Particles
@@ -164,7 +173,7 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* Content container */}
+      {/* Content */}
       <div
         style={{
           position: "relative",
@@ -178,8 +187,10 @@ const HeroSection = () => {
           style={{ fontSize: "3rem", fontWeight: "bold", marginBottom: "1rem" }}
         >
           Hey, I'm John <br />
-          <span style={{ color: words[wordIndex].color }}>{displayText}</span>
-          {showCursor && <span style={{ opacity: showCursor ? 1 : 0 }}>|</span>}
+          <span style={{ color: words[currentWordIndex].color }}>
+            {displayText}
+            <span style={{ opacity: showCursor ? 1 : 0 }}>|</span>
+          </span>
         </h1>
         <p style={{ fontSize: "1.2rem", color: "#aaa", marginBottom: "2rem" }}>
           I craft visually appealing designs that bring brands to life.
@@ -194,10 +205,7 @@ const HeroSection = () => {
             borderRadius: "4px",
             fontSize: "1rem",
             cursor: "pointer",
-            transition: "background-color 0.3s",
           }}
-          onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")}
-          onMouseOut={(e) => (e.target.style.backgroundColor = "#007bff")}
         >
           Get In Touch
         </button>

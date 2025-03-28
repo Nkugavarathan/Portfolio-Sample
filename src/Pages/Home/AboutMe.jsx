@@ -12,6 +12,7 @@ export default function AboutMe() {
         transition={{ duration: 1, ease: "easeOut" }}
         viewport={{ once: true }}
       >
+        photo
         {/* <img src="./img/about-me.png" alt="About Me" /> */}
       </motion.div>
 
